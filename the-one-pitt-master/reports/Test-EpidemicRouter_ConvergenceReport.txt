@@ -1,0 +1,6 @@
+Message Started           = 160175
+Message Relayed           = 115770
+Average Convergence Time  = 2016.1692701938732
+Average Last Update Time  = 4713.914223869716
+Average Residue           = 0.0
+Overhead Ratio            = 232.00400801603206

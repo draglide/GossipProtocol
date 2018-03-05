@@ -73,16 +73,7 @@ public class GossipPushBlindRandomRouter implements RoutingDecisionEngineFIX{
         }
         DecisionEngineRouterFIX thisRouter = (DecisionEngineRouterFIX) thisHost.getRouter();
         for (String m : readyToDelete) {
-            if (thisRouter.isSending(m)) {
-                List<Connection> conList = thisHost.getConnections();
-                for (Connection con : conList) {
-                    if (con.getMessage()!=null&&con.getMessage().getId()==m) {
-                        con.abortTransfer();
-                        break;
-                    }
-                }
-            }
-            thisHost.deleteMessage(m, false);
+            thisRouter.deleteMessage(m, false);
         }
         readyToDelete.clear();
     }

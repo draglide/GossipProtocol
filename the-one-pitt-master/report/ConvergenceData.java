@@ -1,5 +1,7 @@
 package report;
 import core.DTNHost;
+import java.util.HashSet;
+import java.util.Set;
 /**
  *
  * @author Adi
@@ -7,12 +9,12 @@ import core.DTNHost;
 public class ConvergenceData {
     private DTNHost source;
     private double convergenceTime;
-    private int nrofNode;
-    private DTNHost lastNode;
+    private Set<DTNHost> nodeList;
+    private double lastNodeTime;
     public ConvergenceData() {
         convergenceTime = 0.0;
-        nrofNode = 0;
-        lastNode = null;
+        nodeList = new HashSet<>();
+        lastNodeTime = 0;
         source = null;
     }
     public double getConvergenceTime() {
@@ -21,17 +23,17 @@ public class ConvergenceData {
     public void setConvergenceTime(double convergenceTime) {
         this.convergenceTime = convergenceTime;
     }
-    public int getNrofNode() {
-        return nrofNode;
+    public Set<DTNHost> getNodeList() {
+        return nodeList;
     }
-    public void setNrofNode(int nrofNode) {
-        this.nrofNode = nrofNode;
+    public void setNodeList(Set<DTNHost> nodeList) {
+        this.nodeList = nodeList;
     }
-    public DTNHost getLastNode() {
-        return lastNode;
+    public double getLastNodeTime() {
+        return lastNodeTime;
     }
-    public void setLastNode(DTNHost lastNode) {
-        this.lastNode = lastNode;
+    public void setLastNodeTime(double lastNodeTime) {
+        this.lastNodeTime = lastNodeTime;
     }
     public DTNHost getSource() {
         return source;

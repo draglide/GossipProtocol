@@ -354,7 +354,6 @@ public abstract class ActiveRouter extends MessageRouter {
 		if (tuples.size() == 0) {
 			return null;
 		}
-		
 		for (Tuple<Message, Connection> t : tuples) {
 			Message m = t.getKey();
 			Connection con = t.getValue();

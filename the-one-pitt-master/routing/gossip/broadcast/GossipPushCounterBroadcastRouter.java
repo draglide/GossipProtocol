@@ -9,24 +9,23 @@ import routing.*;
 public class GossipPushCounterBroadcastRouter implements RoutingDecisionEngine{
     /**Set for Message Tombstone List */
     protected Set<String> tombstone;
-    /**Set for Network Size */
-    protected Set<DTNHost> DTNList;
+    /**Map for Death Certificate */
+    protected Map<DTNHost, Double> deathCertificate;
     /**Rejected Count from Setting */
     protected static final String REJECTED_COUNT_PROPERTY = "rejectCount";
+    protected static final int REJECT_COUNT = 1;
     protected int rejectCount;
-    /**Adaptive by Default */
-    protected boolean adaptive = true;
     public GossipPushCounterBroadcastRouter(Settings s) {
         if (s.contains(REJECTED_COUNT_PROPERTY)) {
             rejectCount = s.getInt(REJECTED_COUNT_PROPERTY);
-            adaptive = false;
+        } else {
+            rejectCount = REJECT_COUNT;
         }
     }
     protected GossipPushCounterBroadcastRouter(GossipPushCounterBroadcastRouter proto) {
-        this.adaptive = proto.adaptive;
         this.rejectCount = proto.rejectCount;
         tombstone = new HashSet<>();
-        DTNList = new HashSet<>();
+        deathCertificate = new HashMap<>();
     }
     @Override
     public void connectionUp(DTNHost thisHost, DTNHost peer) {
@@ -40,21 +39,22 @@ public class GossipPushCounterBroadcastRouter implements RoutingDecisionEngine{
     public void doExchangeForNewConnection(Connection con, DTNHost peer) {
         DTNHost myHost = con.getOtherNode(peer);
         GossipPushCounterBroadcastRouter partner = getOtherGossipRouter(peer);
-        /**Summary Vector for Network Size */
-        this.DTNList.add(peer);
-        partner.DTNList.add(myHost);
-        this.DTNList.addAll(partner.DTNList);
-        partner.DTNList.addAll(this.DTNList);
+        /**Summary Vector DC */
+        sumVectorDC(myHost, peer);
+        /**Delete Obsolete Update */
+        checkDC(deathCertificate, myHost);
+        checkDC(partner.deathCertificate, peer);
     }
 
     @Override
     public boolean newMessage(Message m) {
         /**Initialization for new message */
-        if (adaptive) {
-            rejectCount = (int) Math.log10(DTNList.size());
-        }
         m.addProperty(REJECTED_COUNT_PROPERTY, rejectCount);
         tombstone.add(m.getId());
+        if (deathCertificate.containsKey(m.getFrom()))
+            deathCertificate.replace(m.getFrom(), m.getCreationTime());
+        else
+            deathCertificate.put(m.getFrom(), m.getCreationTime());
         return true;
     }
 
@@ -93,9 +93,6 @@ public class GossipPushCounterBroadcastRouter implements RoutingDecisionEngine{
             return false;
         }
         /**Initialization for relayed message */
-        if (adaptive) {
-            rejectCount = (int) Math.log10(DTNList.size());
-        }
         m.updateProperty(REJECTED_COUNT_PROPERTY, rejectCount);
         tombstone.add(m.getId());
         return true;
@@ -122,5 +119,35 @@ public class GossipPushCounterBroadcastRouter implements RoutingDecisionEngine{
         assert otherRouter instanceof DecisionEngineRouter : "This router only works " + 
         " with other routers of same type";
         return (GossipPushCounterBroadcastRouter)((DecisionEngineRouter)otherRouter).getDecisionEngine();
+    }
+    private void sumVectorDC(DTNHost thisHost, DTNHost peer){
+        GossipPushCounterBroadcastRouter partner = getOtherGossipRouter(peer);
+        for (Map.Entry<DTNHost, Double> entry : this.deathCertificate.entrySet()) {
+            DTNHost key = entry.getKey();
+            if (!partner.deathCertificate.containsKey(key)) {
+                partner.deathCertificate.put(key, entry.getValue());
+            } else {
+                Double value = entry.getValue();
+                if (partner.deathCertificate.get(key)<value) {
+                    partner.deathCertificate.replace(key, value);
+                }
+            }
+        }
+        this.deathCertificate.clear();
+        this.deathCertificate.putAll(partner.deathCertificate);
+    }
+    private void checkDC(Map<DTNHost, Double> dc, DTNHost thisHost) {
+        Collection<Message> cm = thisHost.getMessageCollection();
+        Set<String> readyToDelete = new HashSet<>();
+        for (Message m : cm) {
+            if (dc.containsKey(m.getFrom())&&dc.get(m.getFrom())>m.getCreationTime()) {
+                readyToDelete.add(m.getId());
+            }
+        }
+        DecisionEngineRouter thisRouter = (DecisionEngineRouter) thisHost.getRouter();
+        for (String m : readyToDelete) {
+            thisRouter.deleteMessage(m, false);
+        }
+        readyToDelete.clear();
     }
 }

@@ -436,7 +436,6 @@ public class DecisionEngineRouter extends ActiveRouter
 			return; // nothing to transfer or is currently transferring 
 		}
 		tryMessagesForConnected(outgoingMessages);
-		
 		for(Iterator<Tuple<Message, Connection>> i = outgoingMessages.iterator(); 
 			i.hasNext();)
 		{

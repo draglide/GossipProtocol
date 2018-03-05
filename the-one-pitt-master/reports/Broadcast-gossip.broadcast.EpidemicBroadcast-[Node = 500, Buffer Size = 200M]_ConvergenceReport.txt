@@ -1,0 +1,4 @@
+Average Convergence Time  = 4305.686670675812
+Average Last Update Time  = 9186.427272437595
+Average Residue           = 0.03731429801752268
+Overhead Ratio            = 363.058287169253
