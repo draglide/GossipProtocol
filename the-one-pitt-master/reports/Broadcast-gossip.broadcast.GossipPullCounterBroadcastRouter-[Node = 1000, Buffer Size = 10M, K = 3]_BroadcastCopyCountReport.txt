@@ -1,1 +1,0 @@
-Number of Broadcast Relayed = 248781

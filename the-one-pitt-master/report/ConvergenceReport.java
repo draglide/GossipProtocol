@@ -82,7 +82,7 @@ public class ConvergenceReport extends Report implements MessageListener{
             lastUpdateTime += v.getLastNodeTime();
             nrofInfected += v.getNodeList().size();
         }
-        report = "Message Started           = "+nrofStarted+"\n"
+        report += "\nMessage Started           = "+nrofStarted+"\n"
                + "Message Relayed           = "+nrofRelayed+"\n"
                + "Average Convergence Time  = "+avgConvTime/convergenceTime.size()+"\n"
                + "Average Last Update Time  = "+lastUpdateTime/convergenceTime.size()+"\n"

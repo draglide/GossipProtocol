@@ -1,5 +1,6 @@
 package routing.gossip;
 import core.*;
+import java.util.Collection;
 import routing.RoutingDecisionEngine;
 /**
  * @author Adi
@@ -30,6 +31,12 @@ public class EpidemicFloodRouter implements RoutingDecisionEngine{
     }
     @Override
     public boolean shouldSaveReceivedMessage(Message m, DTNHost thisHost) {
+        Collection<Message> messageCollection = thisHost.getMessageCollection();
+        for (Message message : messageCollection) {
+            if (m.getId().equals(message.getId())) {
+                return false;
+            }
+        }
         return true;
     }
     @Override
