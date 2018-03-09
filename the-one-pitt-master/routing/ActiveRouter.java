@@ -215,7 +215,7 @@ public abstract class ActiveRouter extends MessageRouter {
 		}
 	
 		if ( hasMessage(m.getId()) || isDeliveredMessage(m) ){
-			return DENIED_OLD; // already seen this message -> reject it
+			return RCV_OK;// already seen this message -> reject it
 		}
 		
 		if (m.getTtl() <= 0 && m.getTo() != getHost()) {
