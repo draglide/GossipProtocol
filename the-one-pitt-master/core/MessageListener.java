@@ -53,4 +53,12 @@ public interface MessageListener {
 	 */
 	public void messageTransferred(Message m, DTNHost from, DTNHost to,
 			boolean firstDelivery);
+        
+        /**
+	 * Method is called when a message is successfully saved
+	 * in a node.
+	 * @param m The message that was saved to buffer
+	 * @param to Node where the message was saved to
+	 */
+        public void messageSavedToBuffer(Message m, DTNHost to);
 }

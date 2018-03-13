@@ -76,4 +76,7 @@ public class DeliveredMessagesReport extends Report implements MessageListener {
 	public void done() {
 		super.done();
 	}
+
+    @Override
+    public void messageSavedToBuffer(Message m, DTNHost to) {}
 }

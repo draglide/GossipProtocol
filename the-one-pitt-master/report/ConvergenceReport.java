@@ -15,6 +15,7 @@ public class ConvergenceReport extends Report implements MessageListener{
     private Map<String, ConvergenceData> convergenceTime;
     private int nrofRelayed;
     private int nrofStarted;
+    private int nrofSavedInBuffer;
     public ConvergenceReport() {
         init();
     }
@@ -23,6 +24,7 @@ public class ConvergenceReport extends Report implements MessageListener{
         super.init();
         nrofRelayed = 0;
         nrofStarted = 0;
+        nrofSavedInBuffer = 0;
         convergenceTime = new HashMap<String, ConvergenceData>();
     }
     @Override
@@ -87,8 +89,14 @@ public class ConvergenceReport extends Report implements MessageListener{
                + "Average Convergence Time  = "+avgConvTime/convergenceTime.size()+"\n"
                + "Average Last Update Time  = "+lastUpdateTime/convergenceTime.size()+"\n"
                + "Average Residue           = "+(nrofNode-nrofInfected/convergenceTime.size())/nrofNode+"\n"
-               + "Overhead Ratio            = "+nrofRelayed/(nrofInfected/convergenceTime.size());
+               + "Transmission Load         = "+nrofRelayed+"\n"
+               + "Resource Load             = "+nrofSavedInBuffer/(nrofInfected/convergenceTime.size());
         write(report);
         super.done();
+    }
+
+    @Override
+    public void messageSavedToBuffer(Message m, DTNHost to) {
+        nrofSavedInBuffer++;
     }
 }

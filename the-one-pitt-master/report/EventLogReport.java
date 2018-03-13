@@ -85,4 +85,7 @@ public class EventLogReport extends Report
 	public void messageTransferStarted(Message m, DTNHost from, DTNHost to) {
 		processEvent(StandardEventsReader.SEND, from, to, m, null);		
 	}
+
+    @Override
+    public void messageSavedToBuffer(Message m, DTNHost to) {}
 }

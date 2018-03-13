@@ -133,6 +133,11 @@ public class MessageChecker implements MessageListener {
 		return this.queue.size() + " event(s) : " + this.queue;
 	}
 
+    @Override
+    public void messageSavedToBuffer(Message m, DTNHost to) {
+        
+    }
+
 	private class MsgCheckerEvent {
 		private Message msg;
 		private DTNHost from;

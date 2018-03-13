@@ -1,0 +1,20 @@
+Message stats for scenario Broadcast-gossip.broadcast.GossipPushCounterBroadcastRouter-986-[Node = 500, Buffer Size = 10M, K = 2]
+sim_time: 86400.0000
+created: 254
+started: 355584
+relayed: 348975
+aborted: 6609
+dropped: 0
+removed: 116533
+delivered: 0
+delivery_prob: 0.0000
+response_prob: 0.0000
+overhead_ratio: NaN
+latency_avg: NaN
+latency_med: NaN
+hopcount_avg: NaN
+hopcount_med: 0
+buffertime_avg: 519.2158
+buffertime_med: 434.4000
+rtt_avg: NaN
+rtt_med: NaN

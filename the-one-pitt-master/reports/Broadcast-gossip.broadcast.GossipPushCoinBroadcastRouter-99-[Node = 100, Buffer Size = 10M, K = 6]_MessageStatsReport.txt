@@ -1,0 +1,20 @@
+Message stats for scenario Broadcast-gossip.broadcast.GossipPushCoinBroadcastRouter-99-[Node = 100, Buffer Size = 10M, K = 6]
+sim_time: 86400.0000
+created: 256
+started: 30953
+relayed: 29385
+aborted: 1568
+dropped: 12172
+removed: 2910
+delivered: 0
+delivery_prob: 0.0000
+response_prob: 0.0000
+overhead_ratio: NaN
+latency_avg: NaN
+latency_med: NaN
+hopcount_avg: NaN
+hopcount_med: 0
+buffertime_avg: 2339.5035
+buffertime_med: 2044.7000
+rtt_avg: NaN
+rtt_med: NaN

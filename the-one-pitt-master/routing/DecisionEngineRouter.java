@@ -372,7 +372,9 @@ public class DecisionEngineRouter extends ActiveRouter
 			// not the final recipient and app doesn't want to drop the message
 			// -> put to buffer
 			addToMessages(aMessage, false);
-			
+			for (MessageListener ml : this.mListeners) {
+                            ml.messageSavedToBuffer(aMessage, getHost());
+                        }
 			// Determine any other connections to which to forward a message
 			findConnectionsForNewMessage(aMessage, from);
 		}

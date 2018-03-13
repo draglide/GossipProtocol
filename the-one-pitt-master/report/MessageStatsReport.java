@@ -178,5 +178,8 @@ public class MessageStatsReport extends Report implements MessageListener {
 		write(statsText);
 		super.done();
 	}
+
+    @Override
+    public void messageSavedToBuffer(Message m, DTNHost to) {}
 	
 }

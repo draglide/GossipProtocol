@@ -83,4 +83,7 @@ public class DeliveryCentralityReport extends Report implements MessageListener
 	public void messageTransferStarted(Message m, DTNHost from, DTNHost to){}
 	public void messageDeleted(Message m, DTNHost where, boolean dropped){}
 	public void messageTransferAborted(Message m, DTNHost from, DTNHost to){}
+
+    @Override
+    public void messageSavedToBuffer(Message m, DTNHost to) {}
 }

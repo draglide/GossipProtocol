@@ -143,9 +143,6 @@ public class GossipPullCoinBroadcastRouter implements RoutingDecisionEngine{
         " with other routers of same type";
         return (GossipPullCoinBroadcastRouter)((DecisionEngineRouter)otherRouter).getDecisionEngine();
     }
-    public Set<String> getTombstone() {
-        return tombstone;
-    }
     private void checkDC(Map<DTNHost, Double> dc, DTNHost thisHost) {
         Collection<Message> cm = thisHost.getMessageCollection();
         Set<String> readyToDelete = new HashSet<>();

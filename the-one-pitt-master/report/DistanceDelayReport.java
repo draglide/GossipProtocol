@@ -105,6 +105,9 @@ public class DistanceDelayReport extends Report implements MessageListener {
 		
 		super.done();
 	}
+
+    @Override
+    public void messageSavedToBuffer(Message m, DTNHost to) {}
 	
  	/**
 	 * Private class that encapsulates time and location related information

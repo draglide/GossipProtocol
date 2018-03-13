@@ -76,4 +76,7 @@ public class MessageGraphvizReport extends Report implements MessageListener {
 		super.done();
 	}
 
+    @Override
+    public void messageSavedToBuffer(Message m, DTNHost to) {}
+
 }
