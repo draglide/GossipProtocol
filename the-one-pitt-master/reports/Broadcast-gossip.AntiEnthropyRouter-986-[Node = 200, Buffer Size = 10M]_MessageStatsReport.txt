@@ -1,0 +1,20 @@
+Message stats for scenario Broadcast-gossip.AntiEnthropyRouter-986-[Node = 200, Buffer Size = 10M]
+sim_time: 86400.0000
+created: 257
+started: 52274
+relayed: 51203
+aborted: 1071
+dropped: 51350
+removed: 0
+delivered: 0
+delivery_prob: 0.0000
+response_prob: 0.0000
+overhead_ratio: NaN
+latency_avg: NaN
+latency_med: NaN
+hopcount_avg: NaN
+hopcount_med: 0
+buffertime_avg: 4611.9587
+buffertime_med: 4687.4000
+rtt_avg: NaN
+rtt_med: NaN

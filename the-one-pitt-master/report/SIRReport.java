@@ -1,5 +1,4 @@
 package report;
-import routing.gossip.broadcast.GossipPullCounterBroadcastRouter;
 import core.DTNHost;
 import core.Message;
 import core.Settings;
@@ -8,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import routing.DecisionEngineRouter;
+import static routing.DecisionEngineRouter.PUBSUB_NS;
 import routing.gossip.*;
 /**
  *
@@ -20,6 +19,7 @@ public class SIRReport extends Report implements UpdateListener{
     public static final String ENGINE_SETTING = "decisionEngine";
     private double lastRecord = Double.MIN_VALUE;
     private int interval;
+    private Tombstone tb;
     private Map<String, Map<Integer, Integer>> susceptible = new HashMap<String, Map<Integer, Integer>>();
     private Map<String, Map<Integer, Integer>> infective = new HashMap<String, Map<Integer, Integer>>();
     private Map<String, Map<Integer, Integer>> removed = new HashMap<String, Map<Integer, Integer>>();
@@ -52,9 +52,10 @@ public class SIRReport extends Report implements UpdateListener{
     private void printLine(List<DTNHost> hosts) {
         int nrofHost = hosts.size();
         for (DTNHost host : hosts) {
-            DecisionEngineRouter d = (DecisionEngineRouter)host.getRouter();
-            GossipPullCounterBroadcastRouter de = (GossipPullCounterBroadcastRouter) d.getDecisionEngine();
-            Set<String> tombstone = de.getTombstone();
+            Settings routeSettings = new Settings(PUBSUB_NS);
+            tb = (Tombstone)routeSettings.createIntializedObject(
+                    "routing." + routeSettings.getSetting(ENGINE_SETTING));
+            Set<String> tombstone = tb.getTombstone();
             for (String m : tombstone) {
                 Map<Integer, Integer> temp;
                 if (susceptible.containsKey(m)) {

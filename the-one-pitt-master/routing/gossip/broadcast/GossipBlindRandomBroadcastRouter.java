@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import routing.DecisionEngineRouter;
 import routing.DecisionEngineRouterFIX;
 import routing.MessageRouter;
 import routing.RoutingDecisionEngineFIX;
@@ -30,7 +29,7 @@ public class GossipBlindRandomBroadcastRouter implements RoutingDecisionEngineFI
     protected double k;
     public GossipBlindRandomBroadcastRouter(Settings s) {
         if (s.contains(K_SETTING)) {
-            k = s.getInt(K_SETTING);
+            k = s.getDouble(K_SETTING);
         } else {
             k = DEFAULT_K;
         }
@@ -71,9 +70,6 @@ public class GossipBlindRandomBroadcastRouter implements RoutingDecisionEngineFI
     }
     @Override
     public boolean shouldSaveReceivedMessage(Message m, DTNHost thisHost) {
-        if (tombstone.contains(m.getId())) {
-            return false;
-        }
         tombstone.add(m.getId());
         return true;
     }
@@ -98,7 +94,7 @@ public class GossipBlindRandomBroadcastRouter implements RoutingDecisionEngineFI
         Collection<Message> msgs = thisHost.getMessageCollection();
         List<String> readyToDelete = new ArrayList<>();
         for (Message m : msgs) {
-            if (Math.random()<=1/2.0) {
+            if (Math.random()<=1/k) {
                 readyToDelete.add(m.getId());
             }
         }
@@ -138,7 +134,7 @@ public class GossipBlindRandomBroadcastRouter implements RoutingDecisionEngineFI
                 readyToDelete.add(m.getId());
             }
         }
-        DecisionEngineRouter thisRouter = (DecisionEngineRouter) thisHost.getRouter();
+        DecisionEngineRouterFIX thisRouter = (DecisionEngineRouterFIX) thisHost.getRouter();
         for (String m : readyToDelete) {
             thisRouter.deleteMessage(m, false);
         }

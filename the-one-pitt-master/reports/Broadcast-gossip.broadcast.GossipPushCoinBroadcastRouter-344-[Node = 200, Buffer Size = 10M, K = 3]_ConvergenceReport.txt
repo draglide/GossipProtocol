@@ -1,8 +1,0 @@
-
-Message Started           = 146705
-Message Relayed           = 138394
-Average Convergence Time  = 3743.055792766557
-Average Last Update Time  = 6691.563779253262
-Average Residue           = 0.10048272860364817
-Transmission Load         = 138394
-Resource Load             = 252.75421734444762

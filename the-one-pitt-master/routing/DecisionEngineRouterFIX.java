@@ -380,7 +380,9 @@ public class DecisionEngineRouterFIX extends ActiveRouter
 			// not the final recipient and app doesn't want to drop the message
 			// -> put to buffer
 			addToMessages(aMessage, false);
-			
+			for (MessageListener ml : this.mListeners) {
+                            ml.messageSavedToBuffer(aMessage, getHost());
+                        }
 			// Determine any other connections to which to forward a message
 			findConnectionsForNewMessage(aMessage, from);
 		}
@@ -402,6 +404,7 @@ public class DecisionEngineRouterFIX extends ActiveRouter
 	protected void transferDone(Connection con)
 	{
 		Message transferred = this.getMessage(con.getMessage().getId());
+                if (transferred!=null) {
 		for(Iterator<Tuple<Message, Connection>> i = outgoingMessages.iterator(); 
 		i.hasNext();)
 		{
@@ -428,6 +431,7 @@ public class DecisionEngineRouterFIX extends ActiveRouter
 //                                }
 //                        }
 		}
+                }
 	}
 
 	@Override

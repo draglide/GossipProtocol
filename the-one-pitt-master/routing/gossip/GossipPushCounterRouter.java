@@ -6,7 +6,7 @@ package routing.gossip;
 import core.*;
 import java.util.*;
 import routing.*;
-public class GossipPushCounterRouter implements RoutingDecisionEngine{
+public class GossipPushCounterRouter implements RoutingDecisionEngine, Tombstone{
     /**Set for Message Tombstone List */
     protected Set<String> tombstone;
     /**Set for Network Size */
@@ -122,5 +122,10 @@ public class GossipPushCounterRouter implements RoutingDecisionEngine{
         assert otherRouter instanceof DecisionEngineRouter : "This router only works " + 
         " with other routers of same type";
         return (GossipPushCounterRouter)((DecisionEngineRouter)otherRouter).getDecisionEngine();
+    }
+
+    @Override
+    public Set<String> getTombstone() {
+        return tombstone;
     }
 }

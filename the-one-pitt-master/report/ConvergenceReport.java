@@ -89,8 +89,8 @@ public class ConvergenceReport extends Report implements MessageListener{
                + "Average Convergence Time  = "+avgConvTime/convergenceTime.size()+"\n"
                + "Average Last Update Time  = "+lastUpdateTime/convergenceTime.size()+"\n"
                + "Average Residue           = "+(nrofNode-nrofInfected/convergenceTime.size())/nrofNode+"\n"
-               + "Transmission Load         = "+nrofRelayed+"\n"
-               + "Resource Load             = "+nrofSavedInBuffer/(nrofInfected/convergenceTime.size());
+               + "Transmission Load         = "+nrofRelayed/(nrofNode+1)+"\n"
+               + "Resource Load             = "+nrofSavedInBuffer/(nrofNode+1);
         write(report);
         super.done();
     }
