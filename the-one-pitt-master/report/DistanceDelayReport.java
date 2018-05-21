@@ -108,6 +108,11 @@ public class DistanceDelayReport extends Report implements MessageListener {
 
     @Override
     public void messageSavedToBuffer(Message m, DTNHost to) {}
+
+    @Override
+    public void connectionUp(DTNHost thisHost) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 	
  	/**
 	 * Private class that encapsulates time and location related information

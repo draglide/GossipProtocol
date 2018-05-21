@@ -61,4 +61,10 @@ public interface MessageListener {
 	 * @param to Node where the message was saved to
 	 */
         public void messageSavedToBuffer(Message m, DTNHost to);
+        
+        /**
+         * 
+         * @param thisHost 
+         */
+        public void connectionUp(DTNHost thisHost);
 }

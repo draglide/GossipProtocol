@@ -99,4 +99,9 @@ public class ConvergenceReport extends Report implements MessageListener{
     public void messageSavedToBuffer(Message m, DTNHost to) {
         nrofSavedInBuffer++;
     }
+
+    @Override
+    public void connectionUp(DTNHost thisHost) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

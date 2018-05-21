@@ -92,17 +92,19 @@ public class GossipBlindRandomBroadcastRouter implements RoutingDecisionEngineFI
     @Override
     public void update(DTNHost thisHost) {
         Collection<Message> msgs = thisHost.getMessageCollection();
-        List<String> readyToDelete = new ArrayList<>();
-        for (Message m : msgs) {
-            if (Math.random()<=1/k) {
-                readyToDelete.add(m.getId());
+        if (!msgs.isEmpty()) {
+            List<String> readyToDelete = new ArrayList<>();
+            for (Message msg : msgs) {
+                if (Math.random()<1/k) {
+                    readyToDelete.add(msg.getId());
+                }
             }
+            DecisionEngineRouterFIX thisRouter = (DecisionEngineRouterFIX) thisHost.getRouter();
+            for (String m : readyToDelete) {
+                thisRouter.deleteMessage(m, false);
+            }
+            readyToDelete.clear();
         }
-        DecisionEngineRouterFIX thisRouter = (DecisionEngineRouterFIX) thisHost.getRouter();
-        for (String m : readyToDelete) {
-            thisRouter.deleteMessage(m, false);
-        }
-        readyToDelete.clear();
     }
     private void sumVectorDC(DTNHost thisHost, DTNHost peer){
         GossipBlindRandomBroadcastRouter partner = getOtherGossipRouter(peer);

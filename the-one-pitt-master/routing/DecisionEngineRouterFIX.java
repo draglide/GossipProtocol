@@ -92,7 +92,7 @@ public class DecisionEngineRouterFIX extends ActiveRouter
 	public static final String ENGINE_SETTING = "decisionEngine";
 	public static final String TOMBSTONE_SETTING = "tombstones";
 	public static final String CONNECTION_STATE_SETTING = "";
-	public static final int UPDATE_INTERVAL = 600;
+	public static final int UPDATE_INTERVAL = 900;
         
         protected double lastRecord = Double.MIN_VALUE;
 	protected boolean tombstoning;
@@ -299,6 +299,9 @@ public class DecisionEngineRouterFIX extends ActiveRouter
 	protected void doExchange(Connection con, DTNHost otherHost)
 	{
 		conStates.put(con, 1);
+                for (MessageListener ml : this.mListeners) {
+                    ml.connectionUp(otherHost);
+                }
 		decider.doExchangeForNewConnection(con, otherHost);
 	}
 	

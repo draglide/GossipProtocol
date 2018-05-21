@@ -1,0 +1,20 @@
+Message stats for scenario Broadcast-gossip.broadcast.GossipBlindTTLBroadcastRouter-99-[Node = 100, Buffer Size = 10M]
+sim_time: 86400.0000
+created: 256
+started: 14126
+relayed: 13845
+aborted: 281
+dropped: 265
+removed: 13811
+delivered: 0
+delivery_prob: 0.0000
+response_prob: 0.0000
+overhead_ratio: NaN
+latency_avg: NaN
+latency_med: NaN
+hopcount_avg: NaN
+hopcount_med: 0
+buffertime_avg: 1642.0211
+buffertime_med: 1370.4000
+rtt_avg: NaN
+rtt_med: NaN

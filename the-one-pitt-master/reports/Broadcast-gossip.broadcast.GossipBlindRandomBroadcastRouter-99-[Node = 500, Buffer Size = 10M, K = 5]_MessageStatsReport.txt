@@ -1,11 +1,11 @@
 Message stats for scenario Broadcast-gossip.broadcast.GossipBlindRandomBroadcastRouter-99-[Node = 500, Buffer Size = 10M, K = 5]
 sim_time: 86400.0000
 created: 254
-started: 121220
-relayed: 120181
-aborted: 1039
-dropped: 13121
-removed: 105601
+started: 122728
+relayed: 121672
+aborted: 1056
+dropped: 27593
+removed: 92541
 delivered: 0
 delivery_prob: 0.0000
 response_prob: 0.0000
@@ -14,7 +14,7 @@ latency_avg: NaN
 latency_med: NaN
 hopcount_avg: NaN
 hopcount_med: 0
-buffertime_avg: 2381.1843
-buffertime_med: 1860.3000
+buffertime_avg: 3106.7923
+buffertime_med: 2795.1000
 rtt_avg: NaN
 rtt_med: NaN

@@ -1,12 +1,12 @@
 package routing.gossip;
 import core.*;
 import java.util.*;
-import routing.RoutingDecisionEngine;
+import routing.RoutingDecisionEngineFIX;
 /*
  * @author Adi
  * @Sanata Dharma University
  */
-public class AntiEnthropyRouter implements RoutingDecisionEngine{
+public class AntiEnthropyRouter implements RoutingDecisionEngineFIX{
     private Set<String> sumVectorList;
     public AntiEnthropyRouter(Settings s) {
     }
@@ -52,7 +52,12 @@ public class AntiEnthropyRouter implements RoutingDecisionEngine{
         return true;
     }
     @Override
-    public RoutingDecisionEngine replicate() {
+    public RoutingDecisionEngineFIX replicate() {
         return new AntiEnthropyRouter(this);
+    }
+
+    @Override
+    public void update(DTNHost thisHost) {
+       
     }
 }
