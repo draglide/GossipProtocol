@@ -1,0 +1,20 @@
+Message stats for scenario Broadcast-gossip.AntiEnthropyRouter-1-[Node = 200, Speed = 5.0, 5.0]
+sim_time: 345600.1000
+created: 946
+started: 677480
+relayed: 615869
+aborted: 61611
+dropped: 616604
+removed: 0
+delivered: 0
+delivery_prob: 0.0000
+response_prob: 0.0000
+overhead_ratio: NaN
+latency_avg: NaN
+latency_med: NaN
+hopcount_avg: NaN
+hopcount_med: 0
+buffertime_avg: 12873.4502
+buffertime_med: 11961.4000
+rtt_avg: NaN
+rtt_med: NaN

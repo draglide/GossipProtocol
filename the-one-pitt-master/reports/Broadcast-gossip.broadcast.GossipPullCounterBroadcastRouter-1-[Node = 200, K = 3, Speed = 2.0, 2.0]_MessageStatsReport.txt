@@ -1,0 +1,20 @@
+Message stats for scenario Broadcast-gossip.broadcast.GossipPullCounterBroadcastRouter-1-[Node = 200, K = 3, Speed = 2.0, 2.0]
+sim_time: 345600.1000
+created: 946
+started: 180094
+relayed: 178672
+aborted: 1422
+dropped: 0
+removed: 178950
+delivered: 0
+delivery_prob: 0.0000
+response_prob: 0.0000
+overhead_ratio: NaN
+latency_avg: NaN
+latency_med: NaN
+hopcount_avg: NaN
+hopcount_med: 0
+buffertime_avg: 2796.9006
+buffertime_med: 2557.5000
+rtt_avg: NaN
+rtt_med: NaN

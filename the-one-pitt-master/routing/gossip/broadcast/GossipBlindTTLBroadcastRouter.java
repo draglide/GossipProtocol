@@ -93,17 +93,17 @@ public class GossipBlindTTLBroadcastRouter implements RoutingDecisionEngineFIX{
     public void update(DTNHost thisHost) {
         Collection<Message> msgs = thisHost.getMessageCollection();
         if (!msgs.isEmpty()) {
-            int min = Integer.MAX_VALUE;
-            int max = Integer.MIN_VALUE;
+            double s = 0;
+            double avg = 0;
             for (Message m : msgs) {
-                if (m.getTtl()<min) {
-                    min = m.getTtl();
-                }
-                if (m.getTtl()>max) {
-                    max = m.getTtl();
-                }
+                avg += m.getTtl();
             }
-            double treshold = (max - min)/this.treshold + min;
+            avg /= msgs.size();
+            for (Message msg : msgs) {
+                s += Math.pow((msg.getTtl()-avg), 2);
+            }
+            s = Math.sqrt((s/msgs.size()));
+            double treshold = avg-s;
             List<String> readyToDelete = new ArrayList<>();
             for (Message m : msgs) {
                 if (m.getTtl()<treshold) {
